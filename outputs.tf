@@ -40,7 +40,7 @@ output "iot_topic_rules_enabled" {
 }
 output "iot_topic_rules_error_action" {
   description = "Map of error_action values across all iot_topic_rules, keyed the same as var.iot_topic_rules"
-  value       = { for k, v in aws_iot_topic_rule.iot_topic_rules : k => v.error_action if v.error_action != null && length(v.error_action) > 0 }
+  value       = { for k, v in aws_iot_topic_rule.iot_topic_rules : k => one(v.error_action) if v.error_action != null && length(v.error_action) > 0 }
 }
 output "iot_topic_rules_firehose" {
   description = "Map of firehose values across all iot_topic_rules, keyed the same as var.iot_topic_rules"
